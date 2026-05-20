@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaibhav Jain — AI-Native Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #faf9f7;
+  --bg-2: #f4f2ee;
+  --surface: #ffffff;
+  --border: #e2ddd6;
+  --border-2: #d0cbc2;
+  --text: #1a1916;
+  --text-2: #5a5750;
+  --text-3: #9b9690;
+  --accent: #2d5a3d;
+  --accent-light: #e8f0eb;
+  --accent-mid: #4a7c5f;
+  --warm: #8b6914;
+  --warm-light: #f5eddc;
+  --blue: #1e3a5f;
+  --blue-light: #e8eef5;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 4px; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 58px;
+  background: rgba(250,249,247,0.93);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px;
+  z-index: 200;
+}
+.nav-logo {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.1px;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  font-size: 13px; font-weight: 400;
+  color: var(--text-2); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  color: var(--accent) !important; font-weight: 500 !important;
+  border: 1px solid var(--accent); padding: 6px 18px; border-radius: 2px;
+  transition: all 0.2s !important;
+}
+.nav-cta:hover { background: var(--accent-light) !important; }
+
+.hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 20px; height: 1.5px; background: var(--text-2); margin: 5px 0; }
+
+/* LAYOUT */
+.wrap { max-width: 1060px; margin: 0 auto; padding: 0 40px; }
+section { padding: 100px 0; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes rise { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding-top: 58px; border-bottom: 1px solid var(--border);
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 360px;
+  gap: 72px; align-items: center; width: 100%;
+}
+
+.hero-left { }
+
+.hero-tag {
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--text-3); letter-spacing: 2.5px; text-transform: uppercase;
+  margin-bottom: 22px; display: flex; align-items: center; gap: 10px;
+  opacity:0; animation: rise 0.6s ease forwards 0.1s;
+}
+.hero-tag::before { content:''; width:20px; height:1px; background:var(--border-2); }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5vw, 62px);
+  font-weight: 400; line-height: 1.1; letter-spacing: -0.4px;
+  margin-bottom: 10px;
+  opacity:0; animation: rise 0.7s ease forwards 0.2s;
+}
+
+.hero-role {
+  font-size: 15px; color: var(--accent); font-weight: 400;
+  margin-bottom: 24px; letter-spacing: 0.1px;
+  opacity:0; animation: rise 0.7s ease forwards 0.3s;
+}
+
+.hero-bio {
+  font-size: 15px; font-weight: 300; color: var(--text-2);
+  max-width: 500px; line-height: 1.85; margin-bottom: 32px;
+  opacity:0; animation: rise 0.7s ease forwards 0.42s;
+}
+
+.hero-availability {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity:0; animation: rise 0.7s ease forwards 0.5s;
+}
+.availability-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.85);} }
+
+.hero-actions {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  opacity:0; animation: rise 0.7s ease forwards 0.58s;
+}
+.btn-fill {
+  font-size: 13px; font-weight: 500; color: var(--surface);
+  background: var(--accent); padding: 11px 24px;
+  text-decoration: none; border: 1px solid var(--accent); border-radius: 2px;
+  transition: all 0.2s;
+}
+.btn-fill:hover { background: var(--accent-mid); border-color: var(--accent-mid); }
+.btn-ghost {
+  font-size: 13px; font-weight: 400; color: var(--text-2);
+  padding: 11px 24px; text-decoration: none;
+  border: 1px solid var(--border-2); border-radius: 2px; transition: all 0.2s;
+}
+.btn-ghost:hover { color: var(--text); border-color: var(--text-3); background: var(--bg-2); }
+
+
+/* SECTION HEAD */
+.sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 48px; }
+.sec-idx { font-family: var(--font-mono); font-size: 10px; color: var(--text-3); letter-spacing: 2px; }
+.sec-h { font-family: var(--font-display); font-size: 30px; font-weight: 400; letter-spacing: -0.3px; }
+.sec-line { flex:1; height:1px; background: var(--border); margin-left:8px; }
+
+/* ABOUT */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+}
+.about-text p {
+  font-size: 15px; color: var(--text-2); line-height: 1.85; margin-bottom: 18px;
+}
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--text); font-weight: 500; }
+
+.about-facts { display: flex; flex-direction: column; gap: 0; }
+.fact-row {
+  display: flex; gap: 20px; padding: 16px 0;
+  border-bottom: 1px solid var(--border); align-items: baseline;
+}
+.fact-row:first-child { border-top: 1px solid var(--border); }
+.fact-label {
+  font-family: var(--font-mono); font-size: 10px; color: var(--text-3);
+  letter-spacing: 1.5px; text-transform: uppercase; width: 90px; flex-shrink: 0;
+}
+.fact-value { font-size: 13.5px; color: var(--text-2); line-height: 1.5; }
+
+/* VALUE PROPS */
+.value-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+}
+.val-cell {
+  background: var(--surface); padding: 28px 24px;
+  transition: background 0.25s; position: relative; overflow: hidden;
+}
+.val-cell::after {
+  content:''; position:absolute; left:0; top:0; bottom:0;
+  width:2px; background:var(--accent); opacity:0; transition:opacity 0.3s;
+}
+.val-cell:hover { background: var(--bg-2); }
+.val-cell:hover::after { opacity:1; }
+.val-icon {
+  font-family: var(--font-mono); font-size: 9px; color: var(--accent);
+  letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 10px;
+}
+.val-cell h3 { font-size: 13.5px; font-weight: 500; margin-bottom: 7px; line-height: 1.35; }
+.val-cell p { font-size: 12.5px; color: var(--text-2); line-height: 1.65; }
+
+/* TIMELINE */
+.timeline { position: relative; }
+.timeline::before {
+  content:''; position:absolute; left:110px; top:0; bottom:0;
+  width:1px;
+  background: linear-gradient(to bottom, transparent, var(--border-2) 10%, var(--border-2) 90%, transparent);
+}
+.tl-item { display:flex; gap:48px; padding:32px 0; position:relative; }
+.tl-item + .tl-item { border-top:1px solid var(--border); }
+.tl-year {
+  width:110px; flex-shrink:0; font-family:var(--font-mono); font-size:11px;
+  color:var(--accent); letter-spacing:1px; text-align:right; padding-right:26px; padding-top:3px; position:relative;
+}
+.tl-year::after {
+  content:''; position:absolute; right:-5px; top:7px;
+  width:9px; height:9px; border-radius:50%;
+  border:2px solid var(--accent); background:var(--bg);
+}
+.tl-body h3 { font-size:15px; font-weight:500; margin-bottom:3px; }
+.tl-body .org { font-size:12.5px; color:var(--accent-mid); margin-bottom:10px; }
+.tl-body p { font-size:13px; color:var(--text-2); max-width:520px; line-height:1.75; }
+.tl-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+.tl-tags span {
+  font-family:var(--font-mono); font-size:10px; color:var(--text-3);
+  border:1px solid var(--border); padding:3px 10px; background:var(--bg-2);
+}
+
+/* PROJECTS */
+.proj-stack { display:grid; gap:2px; background:var(--border); border:1px solid var(--border); }
+.proj-card {
+  background:var(--surface); padding:36px 36px 32px;
+  position:relative; overflow:hidden; transition:background 0.25s;
+}
+.proj-card:hover { background:var(--bg-2); }
+.proj-card::before {
+  content:''; position:absolute; left:0; top:0; bottom:0;
+  width:3px; background:var(--accent); opacity:0; transition:opacity 0.3s;
+}
+.proj-card:hover::before { opacity:1; }
+
+.proj-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+.proj-type { font-family:var(--font-mono); font-size:9px; color:var(--text-3); letter-spacing:2px; text-transform:uppercase; }
+.proj-impact {
+  font-family:var(--font-mono); font-size:10px; padding:4px 11px;
+  border-radius:2px; letter-spacing:0.3px; white-space:nowrap;
+}
+.impact-green { color:var(--accent); background:var(--accent-light); border:1px solid #c4d9c9; }
+.impact-cyan  { color:var(--blue);  background:var(--blue-light);   border:1px solid #c8d5e4; }
+.impact-warm  { color:var(--warm);  background:var(--warm-light);   border:1px solid #e0d4b0; }
+
+.proj-card h3 {
+  font-family:var(--font-display); font-size:21px; font-weight:400;
+  margin-bottom:5px; line-height:1.2; letter-spacing:-0.2px;
+}
+.proj-subtitle { font-size:12.5px; color:var(--text-3); margin-bottom:20px; font-style:italic; }
+
+/* Problem / Approach / Outcome structure */
+.proj-pao { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); margin-bottom:20px; }
+.pao-block { background:var(--bg); padding:16px 18px; }
+.pao-label {
+  font-family:var(--font-mono); font-size:9px; color:var(--text-3);
+  letter-spacing:2px; text-transform:uppercase; margin-bottom:7px;
+}
+.pao-text { font-size:12.5px; color:var(--text-2); line-height:1.65; }
+
+.proj-highlights {
+  display:flex; flex-wrap:wrap; gap:20px; margin-bottom:16px;
+  padding:16px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+}
+.proj-hl { display:flex; align-items:baseline; gap:7px; }
+.hl-num { font-family:var(--font-display); font-size:22px; color:var(--accent); line-height:1; }
+.hl-label { font-size:11px; color:var(--text-3); max-width:100px; line-height:1.4; }
+
+.proj-tech { display:flex; flex-wrap:wrap; gap:5px; margin-top:14px; }
+.proj-tech span {
+  font-family:var(--font-mono); font-size:10px; color:var(--text-3);
+  border:1px solid var(--border); padding:3px 9px; background:var(--bg-2);
+}
+.proj-actions { display:flex; gap:9px; margin-top:16px; }
+.proj-actions a {
+  font-size:12px; color:var(--text-2); text-decoration:none;
+  padding:7px 16px; border:1px solid var(--border-2); border-radius:2px; transition:all 0.2s;
+}
+.proj-actions a:hover { color:var(--accent); border-color:var(--accent); background:var(--accent-light); }
+
+.proj-status {
+  display:inline-block; font-family:var(--font-mono); font-size:9px;
+  color:var(--warm); background:var(--warm-light); border:1px solid #e0d4b0;
+  padding:3px 9px; letter-spacing:1px; text-transform:uppercase; margin-left:8px;
+  vertical-align: middle;
+}
+
+/* DECK TOGGLE (for case-study PDF embeds) */
+.deck-toggle { margin-top: 18px; }
+.deck-btn {
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.deck-btn:hover { background: var(--accent); color: #fff; }
+.deck-embed { margin-top: 14px; }
+
+/* SKILLS */
+.skills-section { background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.skills-grid {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:1px; background:var(--border); border:1px solid var(--border);
+}
+.skill-group { background:var(--surface); padding:24px 22px; }
+.skill-group-label {
+  font-family:var(--font-mono); font-size:9px; color:var(--accent);
+  letter-spacing:2.5px; text-transform:uppercase;
+  margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--border);
+}
+.skill-list { display:flex; flex-direction:column; gap:7px; }
+.skill-list span { font-size:13px; color:var(--text-2); }
+
+/* LEADERSHIP */
+.lead-grid {
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:1px; background:var(--border); border:1px solid var(--border);
+}
+.lead-card { background:var(--surface); padding:28px; transition:background 0.2s; }
+.lead-card:hover { background:var(--bg-2); }
+.lead-card h3 { font-size:14.5px; font-weight:500; margin-bottom:4px; }
+.lead-card .lead-role { font-size:12px; color:var(--accent-mid); margin-bottom:10px; }
+.lead-card p { font-size:12.5px; color:var(--text-2); line-height:1.7; }
+.lead-tag {
+  font-family:var(--font-mono); font-size:9px; color:var(--text-3);
+  letter-spacing:1.5px; text-transform:uppercase; margin-top:12px;
+  display:inline-block; border:1px solid var(--border); padding:3px 9px; background:var(--bg-2);
+}
+
+/* CONTACT */
+.contact {
+  background:var(--text); color:var(--bg);
+  padding:90px 0 80px; text-align:center;
+}
+.contact h2 {
+  font-family:var(--font-display); font-size:clamp(28px,4vw,46px);
+  font-weight:400; margin-bottom:12px; color:var(--bg);
+}
+.contact h2 em { font-style:italic; color:#9ecfae; }
+.contact > .wrap > p {
+  font-size:14px; color:#8a8780; margin-bottom:32px;
+  max-width:380px; margin-left:auto; margin-right:auto;
+}
+.contact-btns { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+.contact-btns a {
+  font-size:13px; color:#c0bdb6; text-decoration:none;
+  padding:10px 26px; border:1px solid #333230; border-radius:2px; transition:all 0.2s;
+}
+.contact-btns a:hover { color:#fff; border-color:#9ecfae; background:rgba(158,207,174,0.08); }
+
+footer {
+  background:var(--text); border-top:1px solid #282825;
+  padding:22px 0; text-align:center;
+  font-family:var(--font-mono); font-size:10px; color:#4a4a48; letter-spacing:1.5px;
+}
+
+/* RESPONSIVE */
+@media (max-width:920px) {
+  .nav { padding:0 24px; }
+  .nav-links { display:none; position:fixed; top:58px; left:0; right:0; background:rgba(250,249,247,0.97); flex-direction:column; padding:24px; gap:16px; border-bottom:1px solid var(--border); }
+  .nav-links.open { display:flex; }
+  .hamburger { display:block; }
+  .wrap { padding:0 24px; }
+  section { padding:72px 0; }
+  .hero-inner { grid-template-columns:1fr; gap:40px; }
+  .hero-right { flex-direction:row; }
+  .hero-photo-wrap { width: 100%; max-width: 360px; }
+  .about-grid { grid-template-columns:1fr; gap:40px; }
+  .value-grid { grid-template-columns:1fr 1fr; }
+  .skills-grid { grid-template-columns:1fr 1fr; }
+  .lead-grid { grid-template-columns:1fr; }
+  .proj-pao { grid-template-columns:1fr; }
+  .timeline::before { display:none; }
+  .tl-year { width:auto; text-align:left; padding-right:0; }
+  .tl-year::after { display:none; }
+  .tl-item { flex-direction:column; gap:6px; }
+  .proj-top { flex-direction:column; gap:8px; }
+}
+@media (max-width:560px) {
+  .value-grid { grid-template-columns:1fr; }
+  .skills-grid { grid-template-columns:1fr; }
+  .hero-actions { flex-direction:column; }
+  .contact-btns { flex-direction:column; align-items:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="#">Vaibhav Jain</a>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-tag">Backend · AI Engineering · Systems</div>
+        <h1>Vaibhav Jain</h1>
+        <div class="hero-role">AI-Native Software Engineer · BITS Pilani, Hyderabad</div>
+        <p class="hero-bio">
+          I build <strong>production AI systems end-to-end</strong> — Java/Spring Boot backends, multi-modal LLM pipelines, and event-driven services on AWS. Currently shipping a tutor-evaluation service at Wiingy that auto-rejects ~60% of applicants in 2–3 minutes. I use AI as <strong>engineering leverage</strong>, not a side-tool — architecting the system, then letting Claude Code / Cursor implement the long tail.
+        </p>
+        <div class="hero-availability">
+          <span class="availability-dot"></span>
+          Open to SDE / AI Engineering internships · 2026
+        </div>
+        <div class="hero-actions">
+          <a href="Vaibhav_Jain_Resume.pdf" class="btn-fill" target="_blank">Download Resume</a>
+          <a href="mailto:2611vaibhavv@gmail.com" class="btn-ghost">Email me</a>
+          <a href="#work" class="btn-ghost">View Projects ↓</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-photo-wrap">
+          <img src="profile.jpg" alt="Vaibhav Jain" style="width:100%; border-radius:4px; display:block;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx">01</span>
+      <h2 class="sec-h">About</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a 3rd-year EEE student at <strong>BITS Pilani, Hyderabad</strong> with a Minor in Finance. I build production AI systems — backends in Java/Spring Boot, multi-modal LLM pipelines, event-driven services on AWS. I treat AI as an engineering primitive, not a side-tool: architect the system, let copilots ship the long tail.</p>
+        <p>At <strong>Wiingy</strong>, I built and deployed a multi-modal tutor evaluation service (FastAPI on EC2) that auto-rejects ~60% of incoming applicants in 2–3 minutes — replacing a 4-person ops team. The system runs Gemini 2.5 Flash Lite with context caching, deterministic config, and ThreadPoolExecutor parallel fan-out across 4 modalities, with schema-validated JSON and two-layer output validation.</p>
+        <p>I ship end-to-end: <strong>ForensIQ</strong> (AI credit intelligence — Python, Gemini Vision, LightGBM at AUC 0.996, live demo), <strong>Provenance</strong> (Java 21 + Spring Boot 3 dark-store quality gate at &lt;100ms p95, Kafka-driven async verification), and <strong>ShelfWatch</strong> (catalog intelligence pipeline scraping 10,000+ SKU snapshots). FirstClub's "architected by humans, implemented by machines" is how I already work.</p>
+      </div>
+      <div class="about-facts reveal">
+        <div class="fact-row">
+          <span class="fact-label">Education</span>
+          <span class="fact-value">B.Tech. EEE · Minor: Finance<br>BITS Pilani, Hyderabad (2023–27)</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Experience</span>
+          <span class="fact-value">AI Engineering Intern · Wiingy<br>Founder's Office Intern · The Mirror</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Stack</span>
+          <span class="fact-value">Java · Spring Boot · Python · PostgreSQL · Redis · Kafka · AWS · Gemini Vision</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Looking for</span>
+          <span class="fact-value">SDE / AI Engineering internships<br>2026</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">Location</span>
+          <span class="fact-value">Hyderabad, India · Open to relocation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx">02</span>
+      <h2 class="sec-h">What I Bring</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="value-grid reveal">
+      <div class="val-cell">
+        <div class="val-icon">Backend</div>
+        <h3>Java &amp; Spring Boot Services</h3>
+        <p>Production REST APIs over PostgreSQL + Redis on AWS — auth, validation, connection pooling, async patterns</p>
+      </div>
+      <div class="val-cell">
+        <div class="val-icon">AI Engineering</div>
+        <h3>Multi-modal LLM Pipelines</h3>
+        <p>Gemini Vision + text pipelines with context caching, schema-validated JSON, two-layer output validation</p>
+      </div>
+      <div class="val-cell">
+        <div class="val-icon">Event-Driven</div>
+        <h3>Kafka &amp; Async Workflows</h3>
+        <p>Decoupling slow LLM calls from request paths — producers, consumers, retry &amp; degrade strategies</p>
+      </div>
+      <div class="val-cell">
+        <div class="val-icon">Cloud / DevOps</div>
+        <h3>AWS · Docker · CI/CD</h3>
+        <p>EC2, ECR, S3, docker-compose stacks; GitHub Actions pipelines (lint → test → build → push)</p>
+      </div>
+      <div class="val-cell">
+        <div class="val-icon">AI-Native Dev</div>
+        <h3>Claude Code &amp; Cursor</h3>
+        <p>Architect first, then ship the long tail with AI copilots — design decisions stay human, velocity compounds</p>
+      </div>
+      <div class="val-cell">
+        <div class="val-icon">Systems Thinking</div>
+        <h3>Tradeoff-Driven Design</h3>
+        <p>Failure modes, degraded-service behavior, where to default to HOLD vs auto-accept under load</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey" style="background:var(--bg-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx">03</span>
+      <h2 class="sec-h">Journey</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-year">2026–now</div>
+        <div class="tl-body">
+          <h3>AI Engineering Intern — GenAI Systems</h3>
+          <div class="org">Wiingy · EdTech platform · AI-assisted tutor hiring</div>
+          <p>Built and deployed a multi-modal AI tutor evaluation service (FastAPI on AWS EC2) consumed by Wiingy's main backend. Auto-rejects ~60% of applicants in 2–3 min with PASS / FLAG / REJECT verdicts across text, 5 images, audio, video — replacing a 4-person ops team. Inference layer over Gemini 2.5 Flash Lite with TTL-based context caching, deterministic config (T=0, seed=42), explicit thinking-budget allocation, ThreadPoolExecutor parallel fan-out, and exponential-backoff retry with json-repair fallback.</p>
+          <div class="tl-tags">
+            <span>FastAPI</span><span>AWS EC2</span><span>Gemini 2.5 Vision</span><span>Multi-modal LLM</span><span>Context Caching</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025</div>
+        <div class="tl-body">
+          <h3>Founder's Office Intern</h3>
+          <div class="org">The Mirror · Early-stage consumer tech</div>
+          <p>Analysed notification engagement across 3 alert formats; shipped LLM-powered personalisation that doubled click-to-open rate. Instrumented an onboarding funnel in SQL across a 500+ user cohort and drove a redesign that cut signup abandonment 18%. Automated a weekly growth KPI pipeline cutting founder review prep from ~90 → ~20 min/week.</p>
+          <div class="tl-tags">
+            <span>SQL</span><span>Funnel Analytics</span><span>LLM Personalisation</span><span>Growth Pipelines</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2025–now</div>
+        <div class="tl-body">
+          <h3>President — Ethos Professional Development Club</h3>
+          <div class="org">BITS Pilani, Hyderabad</div>
+          <p>Leading a 30-member team serving 500+ students across industry speaker sessions, a peer mentorship program, and professional workshops.</p>
+          <div class="tl-tags">
+            <span>Leadership</span><span>Operations</span><span>Team Management</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2023–27</div>
+        <div class="tl-body">
+          <h3>B.Tech. EEE · Minor: Finance</h3>
+          <div class="org">BITS Pilani, Hyderabad Campus</div>
+          <p>Cross-disciplinary foundation — electrical engineering for systems thinking, finance minor for business and valuation fluency.</p>
+          <div class="tl-tags">
+            <span>BITS Pilani</span><span>Engineering</span><span>Finance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx">04</span>
+      <h2 class="sec-h">Selected Projects</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="proj-stack">
+
+      <!-- Provenance -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-type">Backend · AI-Native System</div>
+          <div class="proj-impact impact-green">&lt;100ms p95 · 100 intakes/sec</div>
+        </div>
+        <h3>Provenance — AI-Native Dark-Store Intake Quality Gate <span class="proj-status">In Build</span></h3>
+        <div class="proj-subtitle">Java 21 · Spring Boot 3 · PostgreSQL · Redis · Kafka · AWS · Gemini 2.5 Vision · React</div>
+        <div class="proj-pao">
+          <div class="pao-block">
+            <div class="pao-label">Problem</div>
+            <div class="pao-text">Curated-grocery dark stores need to pre-verify quality at intake — not assume it. A worker scanning a crate of mangoes can't wait 5s for an LLM, and a false-accept (ships rotten produce) is worse than a slow gate.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Approach</div>
+            <div class="pao-text">Three-path Spring Boot 3 architecture: sync intake returns 202 in &lt;100ms, async Kafka-driven Gemini Vision verification across 5 categories × 5 quality dimensions, read-side audit. Redis caches per-SKU reference data with prompt-version-keyed invalidation.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Outcome</div>
+            <div class="pao-text">Sustained 100 intakes/sec at &lt;100ms p95 under k6 load test (t3.small). Median full decision ~5s. LLM timeouts default to HOLD with a human-review flag — quality moat preserved even under degraded service.</div>
+          </div>
+        </div>
+        <div class="proj-highlights">
+          <div class="proj-hl"><span class="hl-num">&lt;100ms</span><span class="hl-label">p95 intake latency</span></div>
+          <div class="proj-hl"><span class="hl-num">5×5</span><span class="hl-label">Category × dimension rubrics</span></div>
+          <div class="proj-hl"><span class="hl-num">100/s</span><span class="hl-label">Sustained intake throughput</span></div>
+        </div>
+        <div class="proj-tech">
+          <span>Java 21</span><span>Spring Boot 3</span><span>PostgreSQL</span><span>Redis</span><span>Kafka</span><span>AWS</span><span>Gemini 2.5 Vision</span><span>React</span><span>Docker</span><span>GitHub Actions</span>
+        </div>
+      </div>
+
+      <!-- ForensIQ -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-type">AI Engineering · Document Pipeline</div>
+          <div class="proj-impact impact-cyan">~2 weeks → ~3 min · AUC 0.996</div>
+        </div>
+        <h3>ForensIQ — AI Credit Intelligence Engine</h3>
+        <div class="proj-subtitle">Python · Gemini 2.5 Vision · Groq Llama 3.3 70B · LightGBM · SHAP · NetworkX · Streamlit</div>
+        <div class="proj-pao">
+          <div class="pao-block">
+            <div class="pao-label">Problem</div>
+            <div class="pao-text">Indian MSME credit underwriting takes ~2 weeks per application. Credit officers manually parse bank statements, GST returns, and legal notices — no standardised scoring, no traceability of why a verdict was reached.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Approach</div>
+            <div class="pao-text">4-stage appraisal service: zero-OCR Gemini Vision pipeline (9-class transaction taxonomy) feeds 5 deterministic Python tests (NetworkX cycle detection, GST–bank reconciliation, etc.) ahead of a parallel 4-dimension research layer synthesised by Groq Llama 3.3 70B.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Outcome</div>
+            <div class="pao-text">LightGBM default-prediction model at AUC 0.996 with SHAP per-feature attribution. Every sub-score traceable to a source document and a specific test. Hard IBC/NCLT/SARFAESI regulatory override enforces RBI prudential norms. Compresses turnaround ~2 weeks → ~3 min.</div>
+          </div>
+        </div>
+        <div class="proj-highlights">
+          <div class="proj-hl"><span class="hl-num">0.996</span><span class="hl-label">LightGBM AUC</span></div>
+          <div class="proj-hl"><span class="hl-num">4</span><span class="hl-label">Pipeline stages</span></div>
+          <div class="proj-hl"><span class="hl-num">~3 min</span><span class="hl-label">Vs ~2-week baseline</span></div>
+        </div>
+        <div class="proj-tech">
+          <span>Python</span><span>Gemini 2.5 Vision</span><span>Groq Llama 3.3 70B</span><span>LightGBM</span><span>SHAP</span><span>NetworkX</span><span>Tavily</span><span>Streamlit</span>
+        </div>
+        <div class="proj-actions">
+          <a href="https://huggingface.co/spaces/abrasive519mars/forensiq" target="_blank">Live Demo ↗</a>
+          <a href="https://github.com/Vaibhav7711" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+
+      <!-- ShelfWatch -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-type">Data Engineering · Scheduled Pipeline</div>
+          <div class="proj-impact impact-warm">10,000+ SKU snapshots · 14 days</div>
+        </div>
+        <h3>ShelfWatch — Public Catalog Intelligence for Curated Grocery <span class="proj-status">In Build</span></h3>
+        <div class="proj-subtitle">Python · Playwright · DuckDB · GitHub Actions · Streamlit</div>
+        <div class="proj-pao">
+          <div class="pao-block">
+            <div class="pao-label">Problem</div>
+            <div class="pao-text">A single point-in-time view of a quick-commerce catalog hides what actually matters operationally — price volatility, stock-out frequency, category churn — patterns that only emerge over weeks of observation.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Approach</div>
+            <div class="pao-text">Scheduled catalog scraper running every 6 hours via GitHub Actions, accumulating ~10,000+ SKU snapshots over 14 days into DuckDB. Analytics layer computes 6 derived metrics surfaced on a public Streamlit dashboard.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Outcome</div>
+            <div class="pao-text">Daily catalog velocity, price volatility, and stock-out frequency tracked live. Dataset used to author a published operator analysis identifying three structural patterns invisible from a single snapshot.</div>
+          </div>
+        </div>
+        <div class="proj-highlights">
+          <div class="proj-hl"><span class="hl-num">10,000+</span><span class="hl-label">SKU snapshots</span></div>
+          <div class="proj-hl"><span class="hl-num">6</span><span class="hl-label">Derived metrics</span></div>
+          <div class="proj-hl"><span class="hl-num">6 hrs</span><span class="hl-label">Scrape cadence</span></div>
+        </div>
+        <div class="proj-tech">
+          <span>Python</span><span>Playwright</span><span>DuckDB</span><span>GitHub Actions</span><span>Streamlit</span>
+        </div>
+      </div>
+
+      <!-- RAG Mutual Fund Assistant -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-type">GenAI · RAG Pipeline</div>
+          <div class="proj-impact impact-cyan">&lt;5 sec vs 20–40 min manual</div>
+        </div>
+        <h3>RAG-Based Mutual Fund Assistant</h3>
+        <div class="proj-subtitle">Natural language Q&amp;A over 400+ pages of fund disclosures</div>
+        <div class="proj-pao">
+          <div class="pao-block">
+            <div class="pao-label">Problem</div>
+            <div class="pao-text">Retail investors spend 20–40 minutes manually reading fund disclosures to answer basic questions about risk, returns, and portfolio composition.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Approach</div>
+            <div class="pao-text">Built a RAG pipeline indexing 400+ pages across 3 fund schemes — chunked at 512 tokens, embedded via Gemini, stored in FAISS with confidence-threshold fallback.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Outcome</div>
+            <div class="pao-text">End-to-end retrieval in under 5 seconds. Edge-case queries return cited source passages rather than hallucinating answers.</div>
+          </div>
+        </div>
+        <div class="proj-highlights">
+          <div class="proj-hl"><span class="hl-num">400+</span><span class="hl-label">Pages indexed</span></div>
+          <div class="proj-hl"><span class="hl-num">3</span><span class="hl-label">Fund schemes covered</span></div>
+          <div class="proj-hl"><span class="hl-num">&lt;5s</span><span class="hl-label">End-to-end retrieval</span></div>
+        </div>
+        <div class="proj-tech">
+          <span>Python</span><span>LangChain</span><span>FAISS</span><span>Gemini Embeddings</span>
+        </div>
+        <div class="proj-actions">
+          <a href="https://mutualfundchatbot-xwhqbfaridflot7vvaol2b.streamlit.app/" target="_blank">Live Demo ↗</a>
+          <a href="https://github.com/Vaibhav7711/MutualFundChatbot" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <!-- SaaS Revenue & Customer Analytics Dashboard -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-type">Analytics · Business Intelligence</div>
+          <div class="proj-impact impact-cyan">Enterprise upsell opportunity surfaced</div>
+        </div>
+        <h3>SaaS Revenue &amp; Customer Analytics Dashboard</h3>
+        <div class="proj-subtitle">Multi-dimensional B2B SaaS analysis across 9,900+ transactions</div>
+        <div class="proj-pao">
+          <div class="pao-block">
+            <div class="pao-label">Problem</div>
+            <div class="pao-text">A B2B SaaS business lacked visibility into which products, segments, and industries were actually driving profit — making resource allocation and upsell decisions ad hoc.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Approach</div>
+            <div class="pao-text">Analyzed 9,900+ transactions across 12 industries and 4 segments using SQL and Excel. Built 3 Tableau dashboards covering revenue mix, segment profitability, and product contribution.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Outcome</div>
+            <div class="pao-text">Identified top 5 products driving ~45% of total profit. Surfaced Enterprise segment at 35% revenue but &lt;15% support cost — quantified ARPU expansion opportunity for upsell prioritization.</div>
+          </div>
+        </div>
+        <div class="proj-highlights">
+          <div class="proj-hl"><span class="hl-num">9,900+</span><span class="hl-label">Transactions analyzed</span></div>
+          <div class="proj-hl"><span class="hl-num">12</span><span class="hl-label">Industries covered</span></div>
+          <div class="proj-hl"><span class="hl-num">~45%</span><span class="hl-label">Profit from top 5 products</span></div>
+        </div>
+        <div class="proj-tech">
+          <span>Tableau</span><span>SQL</span><span>Excel</span>
+        </div>
+      </div>
+
+      <!-- Claude Skills - In-Conversation Activation -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-type">Product Case Study · Growth Strategy</div>
+          <div class="proj-impact impact-green">RICE 38.25 · $3.4M projected ARR</div>
+        </div>
+        <h3>Claude Skills — In-Conversation Activation Strategy</h3>
+        <div class="proj-subtitle">6-hypothesis research → RICE prioritization → "Skill from Output" design with working prototype</div>
+        <div class="proj-pao">
+          <div class="pao-block">
+            <div class="pao-label">Problem</div>
+            <div class="pao-text">Claude Skills exists across all paid plans but has near-zero in-product discovery — Settings-first design, SKILL.md syntax barrier, and no contextual trigger at the moment of user friction. The capability is built; the activation mechanism isn't.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Approach</div>
+            <div class="pao-text">Full case study: 30 survey respondents + 5 depth interviews + 3 recall walkthroughs validating 6 hypotheses. RICE-prioritized 3 candidate solutions; selected "Skill from Output" — an inline chip surfaced after high-quality outputs that compiles the response into an editable Skill via Haiku + Sonnet.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Outcome</div>
+            <div class="pao-text">6-layer system architecture, 10-screen wireframe flow, working prototype, and AARRR metrics framework with Skill Activation Rate as north star. Projected 8–12% Pro/Max churn reduction and 5% Free-to-Pro conversion uplift from chip exposure.</div>
+          </div>
+        </div>
+        <div class="proj-highlights">
+          <div class="proj-hl"><span class="hl-num">38.25</span><span class="hl-label">RICE score vs 16.80 / 10.31</span></div>
+          <div class="proj-hl"><span class="hl-num">38</span><span class="hl-label">Users researched across 3 methods</span></div>
+          <div class="proj-hl"><span class="hl-num">$3.4M</span><span class="hl-label">Projected incremental ARR at 1% F2P lift</span></div>
+        </div>
+        <div class="proj-tech">
+          <span>User Research</span><span>RICE Framework</span><span>AARRR Metrics</span><span>System Architecture</span><span>Wireframes</span><span>Prototype</span>
+        </div>
+        <div class="proj-actions">
+          <a href="https://fun-clone-works.lovable.app/" target="_blank">Live Prototype ↗</a>
+        </div>
+        <div class="deck-toggle">
+          <button class="deck-btn" onclick="toggleDeck(this, 'claude-skills-deck')">View Deck ↓</button>
+          <div class="deck-embed" id="claude-skills-deck" style="display:none;">
+            <iframe src="claude-skills-deck.pdf" width="100%" height="520" style="border:none; border-radius:8px;"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- FP&A Risk Analytics Platform -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-type">FP&amp;A · Financial Analytics</div>
+          <div class="proj-impact impact-warm">50+ KPIs · 9 core modules</div>
+        </div>
+        <h3>FP&amp;A Risk Analytics Platform</h3>
+        <div class="proj-subtitle">Scenario analytics and forward-looking risk monitoring for UK SME SaaS</div>
+        <div class="proj-pao">
+          <div class="pao-block">
+            <div class="pao-label">Problem</div>
+            <div class="pao-text">UK SME SaaS businesses using cloud accounting tools (Xero/QBO/MYOB) had no unified platform for forward-looking financial risk monitoring or board-ready scenario analysis.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Approach</div>
+            <div class="pao-text">Designed a risk-focused FP&amp;A platform with 9 core modules — financial reporting, scenario analysis, cash flow modelling, KPI analytics, and governance. Automated data pipelines from cloud accounting APIs.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Outcome</div>
+            <div class="pao-text">Cross-functional tracking framework across 50+ KPIs with board-ready risk insights. Enabled real-time scenario planning replacing manual spreadsheet-driven financial reviews.</div>
+          </div>
+        </div>
+        <div class="proj-highlights">
+          <div class="proj-hl"><span class="hl-num">9</span><span class="hl-label">Core platform modules</span></div>
+          <div class="proj-hl"><span class="hl-num">50+</span><span class="hl-label">KPIs tracked</span></div>
+          <div class="proj-hl"><span class="hl-num">3</span><span class="hl-label">Accounting integrations</span></div>
+        </div>
+        <div class="proj-tech">
+          <span>Python</span><span>Xero API</span><span>QBO</span><span>MYOB</span><span>KPI Analytics</span><span>Scenario Modelling</span>
+        </div>
+      </div>
+
+      <!-- n8n Teardown -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-type">APM Case Study · Product Strategy</div>
+          <div class="proj-impact impact-warm">45 min → &lt;10 min activation</div>
+        </div>
+        <h3>n8n — Product Teardown &amp; Growth Strategy</h3>
+        <div class="proj-subtitle">Full APM case study: market sizing → user journey → prioritized solutions → metrics</div>
+        <div class="proj-pao">
+          <div class="pao-block">
+            <div class="pao-label">Problem</div>
+            <div class="pao-text">n8n's powerful automation tool has a steep onboarding curve — 68% of new users churn before completing their first workflow, validated via Reddit/GitHub research.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Approach</div>
+            <div class="pao-text">End-to-end product analysis: TAM/SAM/SOM sizing, user journey mapping with 4 friction points, RICE-prioritized solutions with wireframes and user stories.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Outcome</div>
+            <div class="pao-text">Full AARRR metrics framework with Weekly Active Workflows as the north star. Projected activation time reduction from 45 min to under 10 min.</div>
+          </div>
+        </div>
+        <div class="proj-highlights">
+          <div class="proj-hl"><span class="hl-num">$2.5B</span><span class="hl-label">Platform analyzed</span></div>
+          <div class="proj-hl"><span class="hl-num">4</span><span class="hl-label">Solutions prioritized</span></div>
+          <div class="proj-hl"><span class="hl-num">AARRR</span><span class="hl-label">Full metrics framework</span></div>
+        </div>
+        <div class="proj-tech">
+          <span>TAM/SAM/SOM</span><span>User Personas</span><span>Journey Mapping</span><span>Wireframes</span><span>AARRR Metrics</span>
+        </div>
+        <div class="deck-toggle">
+          <button class="deck-btn" onclick="toggleDeck(this, 'n8n-deck')">View Deck ↓</button>
+          <div class="deck-embed" id="n8n-deck" style="display:none;">
+            <iframe src="n8n-deck.pdf" width="100%" height="520" style="border:none; border-radius:8px;"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spotify Detective -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-type">Product Case Study · PRD</div>
+          <div class="proj-impact impact-green">12–18% playlist save uplift</div>
+        </div>
+        <h3>Spotify Detective — Cross-Platform Music Discovery</h3>
+        <div class="proj-subtitle">From user research to full PRD with RICE-scored roadmap</div>
+        <div class="proj-pao">
+          <div class="pao-block">
+            <div class="pao-label">Problem</div>
+            <div class="pao-text">68% of surveyed users (30+ respondents) couldn't save songs discovered on Reels/Shorts to Spotify — a high-frequency, unmet need with no native solution.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Approach</div>
+            <div class="pao-text">Designed Spotify Detective using acoustic fingerprinting. Produced a full PRD — user flows, edge cases, API integration plan, and RICE-scored feature roadmap.</div>
+          </div>
+          <div class="pao-block">
+            <div class="pao-label">Outcome</div>
+            <div class="pao-text">Measurement plan tracking activation rate, detection accuracy, and streaming uplift. Projected 12–18% increase in playlist saves from target segment.</div>
+          </div>
+        </div>
+        <div class="proj-highlights">
+          <div class="proj-hl"><span class="hl-num">30+</span><span class="hl-label">Users surveyed</span></div>
+          <div class="proj-hl"><span class="hl-num">68%</span><span class="hl-label">Validated pain point</span></div>
+          <div class="proj-hl"><span class="hl-num">RICE</span><span class="hl-label">Prioritized roadmap</span></div>
+        </div>
+        <div class="proj-tech">
+          <span>User Research</span><span>PRD</span><span>RICE Framework</span><span>Measurement Plan</span>
+        </div>
+        <div class="deck-toggle">
+          <button class="deck-btn" onclick="toggleDeck(this, 'spotify-deck')">View Deck ↓</button>
+          <div class="deck-embed" id="spotify-deck" style="display:none;">
+            <iframe src="spotify-deck.pdf" width="100%" height="520" style="border:none; border-radius:8px;"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx">05</span>
+      <h2 class="sec-h">Skills &amp; Tools</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-list">
+          <span>Java</span>
+          <span>Python</span>
+          <span>SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Backend &amp; Infra</div>
+        <div class="skill-list">
+          <span>Spring Boot</span>
+          <span>PostgreSQL · Redis</span>
+          <span>Apache Kafka</span>
+          <span>AWS · Docker</span>
+          <span>CI/CD (GitHub Actions)</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">AI Engineering</div>
+        <div class="skill-list">
+          <span>Gemini API (text + vision)</span>
+          <span>LangChain · RAG pipelines</span>
+          <span>Multi-modal LLM evaluation</span>
+          <span>Prompt engineering</span>
+          <span>Schema-validated JSON</span>
+          <span>Context caching</span>
+          <span>Claude Code · Cursor</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Data &amp; ML</div>
+        <div class="skill-list">
+          <span>Pandas · DuckDB</span>
+          <span>LightGBM · SHAP</span>
+          <span>NetworkX</span>
+          <span>Tableau · Excel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-idx">06</span>
+      <h2 class="sec-h">Leadership &amp; Recognition</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="lead-grid reveal">
+      <div class="lead-card">
+        <h3>President — Ethos Club</h3>
+        <div class="lead-role">BITS Pilani Hyderabad · Aug 2025 – Present</div>
+        <p>Leading a 30-member team serving 500+ students across industry sessions, peer mentorship, and professional development initiatives.</p>
+        <div class="lead-tag">Team Leadership</div>
+      </div>
+      <div class="lead-card">
+        <h3>LaunchPad '23 &amp; '24</h3>
+        <div class="lead-role">Co-organizer</div>
+        <p>Co-organized pitch events with 30+ startup teams and 200+ attendees. Facilitated VC and angel investor participation end-to-end.</p>
+        <div class="lead-tag">Startup Ecosystem</div>
+      </div>
+      <div class="lead-card">
+        <h3>Fest Appraisal Committee</h3>
+        <div class="lead-role">BITS Pilani Hyderabad · 2025–26</div>
+        <p>Evaluated budgets across 8+ departments for a ₹2+ crore festival; recommendations adopted in final execution.</p>
+        <div class="lead-tag">Budget &amp; Prioritization</div>
+      </div>
+      <div class="lead-card">
+        <h3>Cloud Computing Foundations</h3>
+        <div class="lead-role">Duke University · Coursera · 2026</div>
+        <p>AWS basics, CI/CD concepts, Docker fundamentals — cloud-native engineering foundations to support production work.</p>
+        <div class="lead-tag">Certification</div>
+      </div>
+      <div class="lead-card">
+        <h3>NextLeap PM Fellowship</h3>
+        <div class="lead-role">Cohort 45</div>
+        <p>Roadmapping, MVP scoping, GTM strategy, and prioritization frameworks — product fluency to ship business-first features as an engineer.</p>
+        <div class="lead-tag">Certification</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2 class="reveal">Let's build <em>something</em></h2>
+    <p class="reveal">Open to SDE and AI Engineering internships. I build end-to-end, ship fast, and treat AI as engineering leverage.</p>
+    <div class="contact-btns reveal">
+      <a href="mailto:2611vaibhavv@gmail.com">Email me</a>
+      <a href="https://linkedin.com/in/vaibhav-jain-212b932b0" target="_blank">LinkedIn</a>
+      <a href="https://github.com/Vaibhav7711" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Vaibhav Jain · BITS Pilani, Hyderabad</div>
+</footer>
+
+<script>
+function toggleDeck(btn, id) {
+  const embed = document.getElementById(id);
+  const open = embed.style.display === 'none';
+  embed.style.display = open ? 'block' : 'none';
+  btn.textContent = open ? 'Hide Deck ↑' : 'View Deck ↓';
+}
+const reveals = document.querySelectorAll('.reveal');
+setTimeout(() => {
+  reveals.forEach(el => { if (!el.classList.contains('visible')) el.classList.add('visible'); });
+}, 300);
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
